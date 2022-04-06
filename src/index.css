@@ -1,14 +1,68 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body{
+  font-family: 'Varela Round', sans-serif;
+  background: #9796f0;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #fbc7d4, #9796f0);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #fbc7d4, #9796f0); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#container{
+  display: flex;
+  flex-direction: column;
+  background-color: aliceblue;
+  width: 75%;
+  height: auto;
+  min-height: 60vh;
+  margin: auto;
+  margin-top: 15%;
+  border-radius: 5px;
+  padding: 2px;
+  justify-content: center;
+  align-items: center;
+}
+
+#stats-section{
+  wifth:100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  background-color: #4746aa;
+  color: #FFF;
+}
+
+div{
+  padding: 5px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h1{
+  color: #4746aa;
+}
+
+button{
+  padding: 5px;
+  width: 50%;
+  margin: auto;
+  border: solid 1px;
+  color: #4746aa;
+
+}
+
+button:hover{
+  background-color: #4746aa;
+  color: #FFF;
+  box-shadow: 0 0.4rem 1.4rem 0 rgba(110, 77, 185, 0.5);
+}
+
+button:active{
+  background-color: #8d8dc0;
+}
+
+input{
+  width: auto;
+  padding: 5px;
+  margin: auto;
+  border: solid 1px;
+  color: #4746aa;
 }
