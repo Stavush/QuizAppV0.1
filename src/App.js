@@ -8,7 +8,7 @@ import correct from "./sounds/correct.wav";
 import wrong from "./sounds/wrong.wav";
 import win from "./sounds/win.wav";
 import fail from "./sounds/fail.wav"
-// import timesup from "./sounds/timesup.wav";
+import timesup from "./sounds/timesup.wav";
 
 /* Questions API */
 const API = 'https://opentdb.com/api.php?amount=100';
@@ -232,6 +232,7 @@ function Game({ setQuestionNumber, currentQuestion, getNewQuestion, setScore, se
 function Timer({ setTimeOut, questionNumber, timeRemains }){
     const [timer, setTimer] = useState(15);
     // const [playBeep, { stop }] = useSound(timesup);
+    const beep = new Audio(timesup);
 
     useEffect(() => {
         if(timer === 0){
@@ -240,9 +241,9 @@ function Timer({ setTimeOut, questionNumber, timeRemains }){
         const interval = setInterval(() => {
             if(timer <= 6){
                 $('#timer').css({color:'red'});
-                // if(timer === 6) {
-                //     playBeep();
-                // }
+                if(timer === 6) {
+                     beep.play();
+                }
             }
             setTimer((prev) => prev - 1);
         }, 1000);
@@ -252,7 +253,7 @@ function Timer({ setTimeOut, questionNumber, timeRemains }){
     useEffect(() => {
         setTimer(15);
         $('#timer').css({color: 'white'});
-        // stop(playBeep());
+         beep.pause();
     }, [questionNumber]);
     return timer>=10 ? `00:${timer}` : `00:0${timer}`;
 }
