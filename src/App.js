@@ -23,7 +23,7 @@ class App extends Component {
         questionNumber: 1,
         timeRemains: 15, // Time for each question
         score: 0,
-        highestScores: [{name: 'Stav', score: 100}, {name: 'Yahel', score: 95}, {name: 'Emily', score: 90}]
+        highestScores: []
     }
 
     setPlayersName = (name) => {
@@ -94,19 +94,20 @@ class App extends Component {
         this.state.score===this.state.totalQuestions ? new Audio(win).play() : new Audio(fail).play();
     }
 
-    /*updateHighscores = () => {
-        const {highestScores, score, playersName} = this.state;
-        if (!highestScores){
-            highestScores.push({name: playersName,
-            score: score})
-        } else{
-            for (var i=0; i<highestScores.length; i++){
-                if (highestScores[i].score > score && (!highestScores[i+1] || highestScores[i+1] < score)){
-                    highestScores = []
-                }
-            }
-        }
-    }*/
+    // updateHighscores = () => {
+    //     const {highestScores, score, playersName} = this.state;
+    //     var minPlayerScore = {name: playersName, score: score}
+    //     for(var i = 0; i < highestScores.length; i++) {
+    //         if(highestScores[i] < minPlayerScore.score) {
+    //             var tmpPlayerScore = highestScores[i];
+    //             highestScores[i] = minPlayerScore;
+    //             minPlayerScore = tmpPlayerScore
+    //         }
+    //     }
+    //     if (highestScores.length < 3) {
+    //         highestScores.push({name: minPlayerScore.name, score: minPlayerScore.score})
+    //     }
+    // }
 
     render() {
         const {questionNumber, score, totalQuestions, playersName, timeRemains} = this.state;
@@ -152,7 +153,7 @@ class App extends Component {
             )
         } else{
             this.playSound();
-            //this.updateHighscores();
+            // this.updateHighscores();
 
             return(
                 <div id="game-container">
@@ -239,6 +240,8 @@ function Timer({ setTimeOut, questionNumber, timeRemains }){
         const interval = setInterval(() => {
             if(timer <= 6){
                 $('#timer').css({color:'red'});
+            }
+            if(timer === 5) {
                 playBeep();
             }
             setTimer((prev) => prev - 1);

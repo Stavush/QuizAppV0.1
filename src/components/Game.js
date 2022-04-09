@@ -40,7 +40,7 @@ function Game({ questions, currentQuestion, questionIndex, setTimeOut, getNewQue
             <div id="answers">
                 {/* change answers from array to set*/}
                 {answers.map(answer =>
-                    (<button onClick={(event) => handleClick(answer)}>
+                    (<button id={answer} onClick={(event) => handleClick(answer)}>
                         {decodeHtml(answer)}
                     </button>)
                 )}
