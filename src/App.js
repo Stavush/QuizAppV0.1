@@ -240,9 +240,9 @@ function Timer({ setTimeOut, questionNumber, timeRemains }){
         const interval = setInterval(() => {
             if(timer <= 6){
                 $('#timer').css({color:'red'});
-            }
-            if(timer === 5) {
-                playBeep();
+                if(timer === 6) {
+                    playBeep();
+                }
             }
             setTimer((prev) => prev - 1);
         }, 1000);
