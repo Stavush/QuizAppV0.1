@@ -8,7 +8,7 @@ import correct from "./sounds/correct.wav";
 import wrong from "./sounds/wrong.wav";
 import win from "./sounds/win.wav";
 import fail from "./sounds/fail.wav"
-import timesup from "./sounds/timesup.wav";
+// import timesup from "./sounds/timesup.wav";
 
 /* Questions API */
 const API = 'https://opentdb.com/api.php?amount=100';
