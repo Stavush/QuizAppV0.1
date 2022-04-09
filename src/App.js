@@ -156,7 +156,7 @@ class App extends Component {
             // this.updateHighscores();
 
             return(
-                <div id="game-container">
+                <div id="game-end">
                     <h1>Game over!</h1>
                     <h2>{playersName}, you scored {score*100/totalQuestions}%</h2>
                     {score===10 ? <h2> Well done, it's a perfect score!</h2> : (score>5 ? <h2>Nice, you were so close...</h2> : <h2>You can do better next time...</h2>)
@@ -220,7 +220,7 @@ function Game({ setQuestionNumber, currentQuestion, getNewQuestion, setScore, se
             <div id="answers">
                 {/* change answers from array to set*/}
                 {answers.map(answer =>
-                    (<button onClick={(event) => handleClick(answer)}>
+                    (<button id={answer} onClick={(event) => handleClick(answer)}>
                         {decodeHtml(answer)}
                     </button>)
                 )}
