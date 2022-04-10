@@ -50,6 +50,10 @@ body{
   border-radius: 5px;
 }
 
+#score{
+  font-size: 20px;
+}
+
 div{
   padding: 5px;
   margin-left: auto;
@@ -87,14 +91,6 @@ button:hover{
 
 button:active{
   background-color: #8d8dc0;
-}
-
-button.correct{
-  background-color: #27ae60;
-}
-
-button.wrong{
-  background-color: #e74c3c;
 }
 
 input{

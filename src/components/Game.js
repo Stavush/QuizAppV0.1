@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import useSound from "use-sound";
 import correct from "../sounds/correct.wav";
 import wrong from "../sounds/wrong.wav";
+import $ from "jquery";
 
 function Game({ setQuestionNumber, currentQuestion, getNewQuestion, setScore, setTimeRemains, mute }){
     const [answers, getAnswers] = useState([]);
@@ -32,16 +33,21 @@ function Game({ setQuestionNumber, currentQuestion, getNewQuestion, setScore, se
     function handleClick (e) {
         const answer = decodeHtml(e);
         if(correctAnswer(answer)){
+            $('#score').css({color: 'green'});
             if(!mute){
                 playCorrect();
             }
             setScore();
         } else{
+            $('#score').css({color: 'red'});
             if(!mute){
                 playWrong();
             }
         }
         setQuestionNumber();
+        setTimeout(function(){
+            $('#score').css({color: '#FFF'});
+        },1000);
         getNewQuestion();
         setTimeRemains();
     }
