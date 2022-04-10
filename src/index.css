@@ -50,7 +50,7 @@ body{
   border-radius: 5px;
 }
 
-#score{
+#score, #timer, #question-number{
   font-size: 20px;
 }
 

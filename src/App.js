@@ -119,7 +119,7 @@ class App extends Component {
                             /* if there's no name, use the Start component */
                             <div>
                                 <h1>Welcome to my quiz!</h1>
-                                <p>You'll have {totalQuestions} questions, 15 seconds to each question. Good luck!</p>
+                                <p>You'll have {totalQuestions} questions, {timeRemains} seconds to each question. Good luck!</p>
                                 <Start setPlayersName={this.setPlayersName}/>
                             </div>
                         )
@@ -169,7 +169,6 @@ class App extends Component {
             return(
                 <div id="game-end">
                     <h1>Game over!</h1>
-
                     <h2>{playersName}, you scored {score*100/totalQuestions}%</h2>
                     {score===totalQuestions ? <h2> Well done, it's a perfect score!</h2> : (score>totalQuestions/2 ? <h2>Nice, you were so close...</h2> : <h2>You can do better next time...</h2>)
                     }
