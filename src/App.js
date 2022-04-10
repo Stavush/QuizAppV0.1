@@ -5,7 +5,7 @@ import Timer from "./components/Timer";
 import Game from "./components/Game";
 import wrong from "./sounds/wrong.wav";
 import win from "./sounds/win.wav";
-import fail from "./sounds/fail.wav"
+import fail from "./sounds/fail.wav";
 
 /* Questions API */
 const API = 'https://opentdb.com/api.php?amount=100';
@@ -20,7 +20,7 @@ class App extends Component {
         questionNumber: 1,
         timeRemains: 15, // Time for each question
         score: 0,
-        highestScores: []
+        mute: false
     }
 
     setPlayersName = (name) => {
@@ -49,7 +49,9 @@ class App extends Component {
 
     setTimeOut = () => {
         // A function that's being called when time's out
-        new Audio(wrong).play();
+        if(!this.state.mute){
+            new Audio(wrong).play();
+        }
         this.setQuestionNumber();
         this.getNewQuestion();
         this.setTimeRemains();
@@ -88,7 +90,22 @@ class App extends Component {
     }
 
     playSound = () => {
-        this.state.score===this.state.totalQuestions ? new Audio(win).play() : new Audio(fail).play();
+        if(!this.state.mute) {
+            this.state.score===this.state.totalQuestions ? new Audio(win).play() : new Audio(fail).play();
+        }
+    }
+
+    mute = () => {
+        if (this.state.mute){
+            this.setState({
+                mute: false
+            })
+        } else {
+            this.setState({
+                mute: true
+            })
+        }
+        console.log(this.state.mute)
     }
 
     render() {
@@ -109,6 +126,17 @@ class App extends Component {
                         : (
                             /* else load the Game component */
                             <div id="game-pad">
+                                <div id="control-pad">
+                                    {this.state.mute ? <button id="mute-btn" onClick={this.mute}>
+                                            <i className="fa-solid fa-volume-xmark"></i>
+                                        </button> :
+                                    <button id="mute-btn" onClick={this.mute}>
+                                        <i className="fa-solid fa-volume-high"></i>
+                                    </button>}
+                                    <button id="exit" onClick={this.startOver}>
+                                        <i className="fa-solid fa-door-open"></i>
+                                    </button>
+                                </div>
                                 <div id="stats-section">
                                     {/* Player's name */}
                                     <div id="question-number">{questionNumber}/{totalQuestions}</div>
@@ -126,7 +154,7 @@ class App extends Component {
                                 <div id="game-section">
                                     <Game questions={this.state.questions} questionNumber={questionNumber} currentQuestion={this.state.currentQuestion}
                                           setQuestionNumber={this.setQuestionNumber} getNewQuestion={this.getNewQuestion}
-                                          setScore={this.setScore} setTimeRemains={this.setTimeRemains} />
+                                          setScore={this.setScore} setTimeRemains={this.setTimeRemains} mute={this.state.mute} />
                                 </div>
                             </div>
                         )
@@ -134,13 +162,16 @@ class App extends Component {
                 </div>
             )
         } else{
-            this.playSound();
+            if(!this.state.mute){
+                this.playSound();
+            }
 
             return(
                 <div id="game-end">
                     <h1>Game over!</h1>
+
                     <h2>{playersName}, you scored {score*100/totalQuestions}%</h2>
-                    {score===10 ? <h2> Well done, it's a perfect score!</h2> : (score>5 ? <h2>Nice, you were so close...</h2> : <h2>You can do better next time...</h2>)
+                    {score===totalQuestions ? <h2> Well done, it's a perfect score!</h2> : (score>totalQuestions/2 ? <h2>Nice, you were so close...</h2> : <h2>You can do better next time...</h2>)
                     }
                     <button onClick={this.startOver}>Try again?</button>
                 </div>

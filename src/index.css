@@ -24,6 +24,16 @@ body{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+#control-pad{
+  justify-items: center;
+  position: relative;
+  top: -50px;
+}
+
+#mute-btn, #exit{
+  width: 100px;
+}
+
 #game-pad{
   justify-content: center;
   align-items: center;
@@ -77,6 +87,14 @@ button:hover{
 
 button:active{
   background-color: #8d8dc0;
+}
+
+button.correct{
+  background-color: #27ae60;
+}
+
+button.wrong{
+  background-color: #e74c3c;
 }
 
 input{

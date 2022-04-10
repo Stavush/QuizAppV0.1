@@ -6,7 +6,7 @@ import useSound from "use-sound";
 import correct from "../sounds/correct.wav";
 import wrong from "../sounds/wrong.wav";
 
-function Game({ setQuestionNumber, currentQuestion, getNewQuestion, setScore, setTimeRemains }){
+function Game({ setQuestionNumber, currentQuestion, getNewQuestion, setScore, setTimeRemains, mute }){
     const [answers, getAnswers] = useState([]);
     const [playCorrect] = useSound(correct);
     const [playWrong] = useSound(wrong);
@@ -32,11 +32,14 @@ function Game({ setQuestionNumber, currentQuestion, getNewQuestion, setScore, se
     function handleClick (e) {
         const answer = decodeHtml(e);
         if(correctAnswer(answer)){
-            playCorrect();
+            if(!mute){
+                playCorrect();
+            }
             setScore();
-
         } else{
-            playWrong();
+            if(!mute){
+                playWrong();
+            }
         }
         setQuestionNumber();
         getNewQuestion();
