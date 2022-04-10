@@ -1,9 +1,8 @@
 import React, {Component} from "react";
+import "./App.css";
 import Start from "./components/Start";
 import Timer from "./components/Timer";
 import Game from "./components/Game";
-import $ from "jquery";
-import "./App.css"
 import wrong from "./sounds/wrong.wav";
 import win from "./sounds/win.wav";
 import fail from "./sounds/fail.wav"
