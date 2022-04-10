@@ -1,38 +1,55 @@
 
 /* Game component */
-import App from "../App";
+import React from "react";
+import useSound from "use-sound";
+import correct from "../sounds/correct.wav";
+import wrong from "../sounds/wrong.wav";
+import "../App.css";
+import { useEffect, useState } from "react";
 
-function Game({ questions, currentQuestion, questionIndex, setTimeOut, getNewQuestion, setScore }){
+function Game({ setQuestionNumber, currentQuestion, getNewQuestion, setScore, setTimeRemains }){
     const [answers, getAnswers] = useState([]);
-    const [timeRemains, setTimeRemains] = useState(20);
-    const [questionsReemained, setQuestionsRemained] = useState(10);
+    const [playCorrect] = useSound(correct);
+    const [playWrong] = useSound(wrong);
 
     function correctAnswer(ans){
         return ans === decodeHtml(currentQuestion['correct_answer']);
     }
 
-    useEffect( () => {
-        // gathers the answers to 1 array named answers
-        getAnswers([...currentQuestion['incorrect_answers'], currentQuestion['correct_answer']]) }, [currentQuestion]);
-
-    function handleClick (e) {
-        const answer = e;
-        console.log("e: ", e)
-        console.log("answer: " + answer + '\n' +
-            "curQ-correctAns: " + currentQuestion['correct_answer'] + '\n' +
-            "check: " + correctAnswer(answer));
-        correctAnswer(answer) ? console.log("success") : console.log("fail");
-
+    function shuffleArray(arr) {
+        // helper function that shuffles a given array
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
     }
 
-    function decodeHtml(html) {
-        //A function that decodes the question's array
-        var txt = document.createElement("textarea");
+    useEffect( () => {
+        // gathers the answers to 1 array named answers
+        const allAnswers = shuffleArray([...currentQuestion['incorrect_answers'], currentQuestion['correct_answer']])
+        getAnswers(allAnswers) }, [currentQuestion]);
+
+    function handleClick (e) {
+        const answer = decodeHtml(e);
+        if(correctAnswer(answer)){
+            playCorrect();
+            setScore();
+
+        } else{
+            playWrong();
+        }
+        setQuestionNumber();
+        getNewQuestion();
+        setTimeRemains();
+    }
+
+    function decodeHtml(html){
+        //A function that decodes the questions array
+        const txt = document.createElement("textarea");
         txt.innerHTML = html;
         return txt.value;
     }
-
-    console.log("answers:", answers)
 
     return(
         <div id="game-pad">
@@ -48,4 +65,5 @@ function Game({ questions, currentQuestion, questionIndex, setTimeOut, getNewQue
         </div>
     )
 }
+
 export default Game
