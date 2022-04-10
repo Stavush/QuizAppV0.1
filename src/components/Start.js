@@ -1,7 +1,7 @@
 /* Start component */
-import React from "react";
 import { useRef } from "react";
 import "../App.css"
+import React from 'react';
 
 function Start({setPlayersName}){
     // Starting point of game component - gets the player's name

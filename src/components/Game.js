@@ -1,11 +1,10 @@
-
 /* Game component */
-import React from "react";
+import "../App.css";
+import React from 'react';
+import { useEffect, useState } from "react";
 import useSound from "use-sound";
 import correct from "../sounds/correct.wav";
 import wrong from "../sounds/wrong.wav";
-import "../App.css";
-import { useEffect, useState } from "react";
 
 function Game({ setQuestionNumber, currentQuestion, getNewQuestion, setScore, setTimeRemains }){
     const [answers, getAnswers] = useState([]);

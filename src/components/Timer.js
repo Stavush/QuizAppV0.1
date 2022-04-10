@@ -1,10 +1,9 @@
 /* Timer component */
-import React from "react";
 import { useEffect, useState } from "react";
 import $ from "jquery";
 import "../App.css";
 
-function Timer({ setTimeOut, questionNumber, timeRemains }){
+function Timer({ setTimeOut, questionNumber }){
     const [timer, setTimer] = useState(15);
 
     useEffect(() => {
