@@ -1,6 +1,7 @@
 # Quiz Game Application
 
-##  This is a JavaScript application 
+This is a JavaScript trivia application 
+
 ## instructions:
 * Enter your name
 * You'll have 20 questions, 15 seconds to each question
